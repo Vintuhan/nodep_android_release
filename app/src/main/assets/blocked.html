@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>заблокировано</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh; background: #000; color: #fff;
+      font-family: "Arial Narrow", Arial, sans-serif;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 28px; text-align: center;
+    }
+    h1 { font-size: 36px; font-weight: 400; margin-bottom: 20px; }
+    p { color: rgba(255,255,255,.7); font-size: 16px; line-height: 1.4; max-width: 28ch; margin-bottom: 12px; }
+    #detail { color: rgba(255,255,255,.4); font-size: 12px; word-break: break-all; margin-bottom: 28px; }
+    button {
+      width: 100%; max-width: 320px; padding: 16px;
+      font-size: 16px; font-family: inherit; border: 1px solid #fff;
+      background: #fff; color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>nodep project</h1>
+  <p>Сайт или приложение связано с азартными играми.</p>
+  <p id="detail"></p>
+  <button type="button" onclick="try{Nodep.goHome()}catch(e){}">на главный экран</button>
+  <script>
+    try {
+      var d = Nodep.getBlockDetail && Nodep.getBlockDetail();
+      if (d) document.getElementById("detail").textContent = d;
+    } catch (e) {}
+  </script>
+</body>
+</html>

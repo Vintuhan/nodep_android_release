@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>nodep</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh; background: #000; color: #fff;
+      font-family: "Arial Narrow", Arial, sans-serif;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 28px; text-align: center;
+    }
+    h1 { font-size: 32px; font-weight: 400; margin-bottom: 12px; }
+    p { color: rgba(255,255,255,.55); font-size: 14px; line-height: 1.45; max-width: 28ch; margin-bottom: 28px; }
+    button {
+      width: 100%; max-width: 320px; padding: 16px;
+      font-size: 16px; font-family: inherit; border: 1px solid #fff;
+      background: #fff; color: #000; cursor: pointer;
+    }
+    button.ghost { background: transparent; color: #fff; margin-top: 12px; }
+    button:disabled { opacity: .4; }
+    #status { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,.5); }
+  </style>
+</head>
+<body>
+  <h1>nodep project</h1>
+  <p>Блокирует казино и ставки на Android. Работает вместе с обычным VPN.</p>
+  <button id="btn" type="button">включить защиту</button>
+  <p id="status">проверка…</p>
+  <script>
+    function refresh() {
+      var on = false;
+      try { on = !!(window.Nodep && Nodep.isAccessibilityEnabled()); } catch (e) {}
+      var btn = document.getElementById("btn");
+      var st = document.getElementById("status");
+      if (on) {
+        st.textContent = "защита включена";
+        btn.textContent = "открыть настройки службы";
+      } else {
+        st.textContent = "защита выключена — включи службу nodep";
+        btn.textContent = "включить защиту";
+      }
+    }
+    document.getElementById("btn").onclick = function () {
+      try { Nodep.openAccessibilitySettings(); } catch (e) { alert("интерфейс недоступен"); }
+      setTimeout(refresh, 800);
+    };
+    refresh();
+    setInterval(refresh, 1500);
+  </script>
+</body>
+</html>
